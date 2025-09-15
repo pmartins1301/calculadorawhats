@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <title>Calculadora de preços da API de mensagens do WhatsApp Business</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="page-hero">
+    <h1>Calculadora de preços da API de mensagens do WhatsApp Business</h1>
+    <p class="subtitle">
+      Estime seus custos mensais de mensagens do WhatsApp e planeje seu orçamento com facilidade
+    </p>
+   
+  </header>
+
+  <main class="shell">
+    <div class="grid">
+      <!-- LEFT COLUMN (info) -->
+      <div class="col-left">
+        <section class="panel">
+          <h2>Calcule seus custos de mensagens do WhatsApp Business</h2>
+          <div class="notice success">
+            <strong>✔ Todas as mensagens recebidas são gratuitas!</strong>
+          </div>
+          <p>
+            A Calculadora da API do WhatsApp Business é uma ferramenta útil para
+            estimar o custo de uso da Plataforma WhatsApp Business (API) para
+            comunicações. Ajuste os campos e veja uma estimativa dos seus custos
+            mensais com mensagens do WhatsApp.
+          </p>
+          <p>
+            A partir de 1º de junho de 2023, a Meta passou de um modelo de preços
+            baseado em conversas para um modelo de preços baseado em mensagens,
+            facilitando o cálculo das taxas mensais para as empresas.
+          </p>
+          <ul class="bullet-list">
+            <li>Você será cobrado apenas pelas mensagens de modelo enviadas. Todas as mensagens recebidas (iniciadas pelo usuário) são inteiramente gratuitas.</li>
+            <li>As empresas são cobradas por <strong>mensagem de modelo entregue</strong>, como no Brasil:</li>
+            <ul>
+              <li>Tipo de mensagem de modelo: Marketing, autenticação ou utilidade</li>
+              <li>País: Determinado pelo código de chamada do país do destinatário</li>
+              <li>Volume: Quanto mais mensagens uma empresa enviar, menor será o custo por mensagem. Os descontos escalonados são reiniciados no início de cada mês.</li>
+            </ul>
+            <li><em>Apenas as mensagens entregues são cobradas.</em></li>
+          </ul>
+        </section>
+
+        <section class="panel">
+          <h3>Compreenda a janela de atendimento ao cliente de 24 horas.</h3>
+          <p>Quando um usuário envia uma mensagem para sua empresa, uma janela de atendimento ao cliente de 24 horas se abre (ou se atualiza). Durante essa janela aberta, você pode enviar qualquer tipo de mensagem.</p>
+          <ul class="bullet-list">
+            <li><strong>Mensagens de formato livre</strong> e mensagens de modelo utilitário são gratuitas.</li>
+            <li>Mensagens de modelo de marketing e autenticação serão cobradas.</li>
+          </ul>
+          <p>Uma vez que a janela se feche, você poderá enviar apenas mensagens de modelo — todas elas são cobradas, incluindo modelos de utilidade.</p>
+          <p class="muted">Os preços listados estão sujeitos a alterações pela Meta e podem variar de acordo com a localização do destinatário.</p>
+        </section>
+      </div>
+
+      <!-- RIGHT COLUMN (calculator) -->
+      <aside class="col-right">
+        <section class="card sticky">
+          <div class="field">
+            <label for="pais">País ou região</label>
+            <select id="pais">
+              <option value="BR" selected>Brazil</option>
+              
+            </select>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="metric">
+            <div class="metric-head">
+              <span>Autenticação</span>
+              <span class="unit">$0.00680 / Mensagem</span>
+            </div>
+            <div class="counter">
+              <button class="pill" data-target="inAutenticacao" data-step="-1000">− 1000</button>
+              <input id="inAutenticacao" type="number" min="0" step="1" value="0" />
+              <button class="pill" data-target="inAutenticacao" data-step="1000">+ 1000</button>
+            </div>
+          </div>
+
+          <div class="metric">
+            <div class="metric-head">
+              <span>Utilidade</span>
+              <span class="unit">$0.00680 / Mensagem</span>
+            </div>
+            <div class="counter">
+              <button class="pill" data-target="inUtilidade" data-step="-1000">− 1000</button>
+              <input id="inUtilidade" type="number" min="0" step="1" value="0" />
+              <button class="pill" data-target="inUtilidade" data-step="1000">+ 1000</button>
+            </div>
+          </div>
+
+          <div class="metric">
+            <div class="metric-head">
+              <span>Marketing</span>
+              <span class="unit">$0.06250 / Mensagem</span>
+            </div>
+            <div class="counter">
+              <button class="pill" data-target="inMarketing" data-step="-1000">− 1000</button>
+              <input id="inMarketing" type="number" min="0" step="1" value="0" />
+              <button class="pill" data-target="inMarketing" data-step="1000">+ 1000</button>
+            </div>
+          </div>
+
+          <div class="metric">
+            <div class="metric-head">
+              <span>Mensagens recebidas (Serviço)</span>
+              <span class="unit">Gratuitas</span>
+            </div>
+            <div class="counter">
+              <button class="pill" data-target="inServico" data-step="-1000">− 1000</button>
+              <input id="inServico" type="number" min="0" step="1" value="0" />
+              <button class="pill" data-target="inServico" data-step="1000">+ 1000</button>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="totais">
+            <div class="row">
+              <span>Estimativa (USD)</span>
+              <strong id="totalUsd" class="mono">US$ 0,00</strong>
+            </div>
+            <div class="row">
+              <span>Estimativa (BRL)</span>
+              <strong id="totalBrl" class="mono">R$ 0,00</strong>
+            </div>
+            <div class="row small muted">
+              <span id="cotacao">Cotação USD→BRL: …</span>
+            </div>
+            <button id="btnCalcular" class="btn btn-primary full">Calcular</button>
+          </div>
+        </section>
+      </aside>
+    </div>
+
+    <!-- TABLE SUMMARY (full-width under the grid, like the screenshot) -->
+    <section class="panel wide">
+      <h3>Detalhamento</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Categoria</th>
+              <th class="right">Quantidade</th>
+              <th class="right">Preço (USD/msg)</th>
+              <th class="right">Subtotal (USD)</th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  
+  <script>
+  // ===== Tiers =====
+  const TIERS_UTILITY = [
+    { max: 250_000, price: 0.0068, discountPct: 0 },
+    { max: 2_000_000, price: 0.0065, discountPct: 4 },
+    { max: 17_000_000, price: 0.0061, discountPct: 10 },
+    { max: 35_000_000, price: 0.0058, discountPct: 15 },
+    { max: 70_000_000, price: 0.0054, discountPct: 21 },
+    { max: Number.POSITIVE_INFINITY, price: 0.0051, discountPct: 25 },
+  ];
+  const MARKETING_LIST_PRICE = 0.0625;
+  const TIERS_MARKETING = TIERS_UTILITY.map(t => ({
+    max: t.max,
+    price: +(MARKETING_LIST_PRICE * (1 - t.discountPct / 100)).toFixed(6),
+  }));
+
+  // ===== Helpers =====
+  function getPriceFromTiers(qtd, tiers) {
+    for (var i=0;i<tiers.length;i++) { if (qtd <= tiers[i].max) return tiers[i].price; }
+    return tiers[tiers.length - 1].price;
+  }
+  function fmtUSD(v){ return `US$ ${Number(v).toFixed(2)}`; }
+  function fmtBRL(v){ return Number(v).toLocaleString("pt-BR",{style:"currency", currency:"BRL"}); }
+  function parseIntSafe(elId){
+    var v = parseInt(document.getElementById(elId).value.replace(/\D/g,'')) || 0;
+    return Math.max(0, v);
+  }
+
+  // ===== FX rate =====
+  let taxaBRL = 0;
+  async function obterCotacao() {
+    try {
+      const resp = await fetch("https://api.exchangerate-api.com/v4/latest/USD");
+      if (!resp.ok) throw new Error();
+      const data = await resp.json();
+      return data && data.rates && data.rates.BRL ? data.rates.BRL : null;
+    } catch { return null; }
+  }
+
+  // ===== Calculation =====
+  function calcular() {
+    const servico = parseIntSafe("inServico");
+    const marketing = parseIntSafe("inMarketing");
+    const autenticacao = parseIntSafe("inAutenticacao");
+    const utilidade = parseIntSafe("inUtilidade");
+
+    const pMarketing = getPriceFromTiers(marketing, TIERS_MARKETING);
+    const pUtility = getPriceFromTiers(autenticacao + utilidade, TIERS_UTILITY);
+    const pAutenticacao = pUtility;
+    const pUtilidade = pUtility;
+
+    const linhas = [
+      ["Serviço (recebidas)", servico, 0],
+      ["Marketing", marketing, pMarketing],
+      ["Autenticação", autenticacao, pAutenticacao],
+      ["Utilidade", utilidade, pUtilidade],
+    ];
+
+    const tbody = document.getElementById("tbody");
+    tbody.innerHTML = "";
+    let totalUSD = 0;
+
+    for (const [nome, qtd, preco] of linhas) {
+      const subtotal = +(qtd * preco).toFixed(2);
+      totalUSD += subtotal;
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${nome}</td>
+        <td class="right mono">${(qtd || 0).toLocaleString("pt-BR")}</td>
+        <td class="right mono">${preco ? fmtUSD(preco) : "—"}</td>
+        <td class="right mono">${fmtUSD(subtotal)}</td>
+      `;
+      tbody.appendChild(tr);
+    }
+    document.getElementById("totalUsd").textContent = fmtUSD(totalUSD);
+    document.getElementById("totalBrl").textContent = taxaBRL ? fmtBRL(totalUSD * taxaBRL) : "—";
+  }
+
+  // ===== Wire-up =====
+  async function init(){
+    // FX
+    taxaBRL = await obterCotacao();
+    document.getElementById("cotacao").textContent = taxaBRL ? `Cotação USD→BRL: ${fmtBRL(taxaBRL)}` : "Cotação USD→BRL: indisponível";
+
+    // Buttons
+    document.querySelectorAll(".pill").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const id = btn.dataset.target;
+        const step = parseInt(btn.dataset.step, 10);
+        const el = document.getElementById(id);
+        const val = parseInt(el.value || "0", 10) || 0;
+        el.value = Math.max(0, val + step);
+        calcular();
+      });
+    });
+
+    // Inputs auto-calc
+    ["inServico","inMarketing","inAutenticacao","inUtilidade"].forEach(id => {
+      const el = document.getElementById(id);
+      ["input","change"].forEach(ev => el.addEventListener(ev, calcular));
+    });
+
+    // Button explicit calculate (optional)
+    document.getElementById("btnCalcular").addEventListener("click", calcular);
+
+    calcular(); // initial
+  }
+
+  document.addEventListener("DOMContentLoaded", init);
+  </script>
+
+</body>
+</html>
